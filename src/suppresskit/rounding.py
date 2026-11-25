@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+from numpy.typing import NDArray
 
 
-def _check(values: pd.DataFrame, base: int) -> np.ndarray:
+def _check(values: pd.DataFrame, base: int) -> NDArray[np.int64]:
     if base < 2:
         raise ValueError("base must be at least 2")
     arr = values.to_numpy()
@@ -14,7 +15,7 @@ def _check(values: pd.DataFrame, base: int) -> np.ndarray:
         raise ValueError("values contain missing data")
     if (arr < 0).any() or (arr != np.floor(arr)).any():
         raise ValueError("values must be non-negative whole numbers")
-    result: np.ndarray = arr.astype(np.int64)
+    result: NDArray[np.int64] = arr.astype(np.int64)
     return result
 
 
